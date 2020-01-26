@@ -1,0 +1,19 @@
+/* * {
+    box-sizing: border-box;
+} */
+body, html {
+    background-color: brown;
+    /* Default text */
+}
+/* .wrapper {
+    display: grid;
+    max-width: 1080px;
+    margin: 0 auto;
+} */
+
+h1{
+    font-family: 2rem;
+    color: red;
+}
+
+/*limit is set to the width so that everything is in the centre*/

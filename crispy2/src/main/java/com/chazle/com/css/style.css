@@ -1,0 +1,311 @@
+/*
+Student:    Andrew Vaz
+Professor:  Ryan Price
+Program:    VDES10199 Interaction Design:Interface
+*/
+
+
+/*----------------------------------------------------------------------------All Start*/
+
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Raleway', 'Helvetica', sans-serif;
+    /* Default text */
+}
+.wrapper {
+    display: grid;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+/*limit is set to the width so that everything is in the centre*/
+
+.high:hover {
+    background-color: #CFE4FF;
+    /* when you hover over the block it'll change color*/
+}
+.high:active {
+    background-color: #9999ff;
+    /* when you click over the block it'll change color*/
+}
+
+/*https://www.w3schools.com/cssref/sel_active.asp*/
+
+
+/*------------------------------------------------------------------------------All End*/
+
+
+/*---------------------------------------------------------------------Navigation Start*/
+
+.logo {
+    grid-area: lo;
+    display: block;
+    height: 110px;
+    width: 200px;
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    line-height: 30px;
+    background-color: #f1eee5;
+    border-radius: 20px;
+    padding: 5px;
+}
+.l_logo {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+}
+.mind {
+    grid-area: mi;
+    line-height: 50px;
+    display: block;
+    height: auto;
+    width: auto;
+}
+.upper {
+    grid-area: u;
+    line-height: 50px;
+}
+.lower {
+    grid-area: l;
+    line-height: 50px;
+}
+.store {
+    grid-area: st;
+    line-height: 50px;
+}
+.about {
+    grid-area: ab;
+    line-height: 50px;
+}
+
+/*Naming the grid spaces to be used in the template */
+
+.nav_grid {
+    display: grid;
+    grid-template-areas: 'lo . . . . .' 'lo mi u l st ab' 'lo . . . . .';
+    grid-template-columns: repeat(6, 1fr);
+    padding: 5px;
+}
+
+/*https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Grid_Template_Areas*/
+
+
+/*https://www.w3schools.com/css/css_grid_item.asp*/
+
+.nav_grid li {
+    list-style: none;
+    text-align: center;
+    /*THIS NEEDS TO BE FIXED CAUSE THE NAV TEXT IS NOT EVENLY ALIGNED*/
+}
+.nav_grid li a {
+    color: black;
+    font-size: 1.2rem;
+    display: block;
+}
+
+/*-----------------------------------------------------------------------Navigation end*/
+
+
+/*------------------------------------------------------------------------Section start*/
+
+h1 {
+    font-size: 4rem;
+    text-align: center;
+    color: #57649c;
+    background: black;
+}
+h2 {
+    position: absolute;
+    top: 10px;
+    font-size: 3rem;
+    padding: 5px;
+    text-align: center;
+    color: #57649c;
+    display: block;
+    background: black;
+}
+h3 {
+    font-size: 2rem;
+    padding: 5px;
+    color: #57649c;
+    display: block;
+    text-align: left;
+}
+
+/*http://www.corelangs.com/css/box/ontop.html*/
+
+.main_titles {
+    left: 380px;
+}
+.main_cell {
+    display: grid;
+    grid-template-areas: '. mid .';
+    grid-template-columns: repeat(3, 1fr);
+}
+.padding {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.store_title {
+    left: 450px;
+}
+.yoga_title {
+    left: 460px;
+}
+.breathing_title {
+    left: 387px;
+}
+.pushup_title {
+    left: 383px;
+}
+.weights_title {
+    left: 409px;
+}
+.squats_title {
+    left: 450px;
+}
+.clothing_title {
+    left: 410px;
+}
+.yoga_1 {
+    position: relative;
+}
+.main_cell {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1080px;
+    height: auto;
+}
+.main_pic {
+    max-width: 1080px;
+    padding: 5px;
+}
+.scell {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    /*makes it easier to align buttons on the grid*/
+    justify-content: center;
+}
+.button {
+    line-height: 100px;
+    /*check if its legal*/
+    width: 200px;
+    background-color: #f1eee5;
+    padding: 5px;
+    margin: auto;
+    text-decoration: none;
+    text-align: center;
+    color: #345580;
+    border: 1px solid #345580;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+.img {
+    position: relative;
+    max-width: 1080px;
+    height: 400px;
+    margin: auto 0;
+}
+.about_pic {
+    display: block;
+    height: 200px;
+    width: 200px;
+    /*    background-color: darkgray;*/
+}
+p {
+    font-size: 1.1rem;
+    max-width: 60ch;
+    text-align: left;
+    color: black;
+}
+#shop_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 5px;
+}
+.shop_g {
+    border: 2px solid #345580;
+    padding: 10px;
+    display: grid;
+}
+.feature img {
+    width: 100%;
+    height: 200px;
+}
+.btn {
+    display: block;
+    width: 50%;
+    text-align: center;
+    height: 50px;
+    border: 4px solid black;
+    border-radius: 10px;
+    line-height: 42px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    align-self: flex-end;
+    justify-self: right;
+}
+.acell {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    /*makes it easier to align buttons on the grid*/
+    justify-content: center;
+}
+.yoga_img1 {
+    max-width: 450px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/*--------------------------------------------------------------------------Section end*/
+
+
+/*-------------------------------------------------------------------------Footer start*/
+
+footer {
+    font-size: 0.9rem;
+    text-align: left;
+    max-height: auto;
+    padding: 5px;
+    padding-bottom: 0;
+}
+.footer_grid {
+    display: grid;
+    max-width: 1080px;
+    margin: 0 auto;
+    grid-template-columns: repeat(4, 1fr);
+    color: black;
+}
+.fcell {
+    max-height: 1000px;
+    background-color: #b5d5ff;
+    list-style: none;
+}
+.smaller_logo {
+    display: block;
+    height: 60px;
+    width: 60px;
+    color: black;
+    padding: 5px;
+}
+li a {
+    text-decoration: none;
+    color: black;
+}
+
+/*---------------------------------------------------------------------------Footer end*/
+
+
+/*fixed no-repeat center center*/
