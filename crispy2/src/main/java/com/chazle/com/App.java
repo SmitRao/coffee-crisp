@@ -1,5 +1,8 @@
 package com.chazle.com;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Experiments with graph stuff.
  *
@@ -19,6 +22,8 @@ public class App {
     }
 
     public static void main(String[] args) {
+
+        Random rand = new Random();
 
         Graph g = new Graph();
 
@@ -42,6 +47,19 @@ public class App {
         g.addEdge(v2, v4, 1);
 
         g.getShortestPathDistanceMap();
+
+        for (int i = 0; i < 4; i++) {
+            for (Vertex v : g.getVertices()) {
+                int sourceVertexId = v.getId();
+
+                for (int connectionId : v.getConnections()) {
+                    g.addEdge(sourceVertexId, connectionId, rand.nextInt(50) + 1); // randomize every connection weight
+                                                                                   // to values between 1 - 50
+                }
+            }
+
+            g.getShortestPathDistanceMap();
+        }
 
         ////////////////////////////////////
         /////// OLD STUFF //////////////////
