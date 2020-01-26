@@ -177,6 +177,10 @@ public class Graph {
         this.recomputeDistances = false;
     }
 
+    /**
+     * This is a temporary solution that allows shortest path distance map to reset.
+     * 
+     */
     public void refreshPathMap() {
         this.shortestPathDistances = new ArrayList<ArrayList<Integer>>();
     }
