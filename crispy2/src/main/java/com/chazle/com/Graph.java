@@ -21,6 +21,8 @@ public class Graph {
     private ArrayList<ArrayList<Integer>> shortestPathDistances;
     private Map<Integer, Vertex> idLookup;
     private boolean recomputeDistances; // we can short-circuit Floyd-Warshall if this is false! (Amortization)
+    private boolean hasDelay;
+    private int updateDelay;
 
     /**
      * Whenever a new graph is instantiated, old graphs cannot add more vertices!
@@ -34,6 +36,33 @@ public class Graph {
         this.V = new HashSet<Vertex>();
         this.shortestPathDistances = new ArrayList<ArrayList<Integer>>();
         this.idLookup = new HashMap<Integer, Vertex>(); // id to vertex mapping
+        this.hasDelay = false;
+        this.updateDelay = 0;
+    }
+
+    /**
+     * Dynamic weight updates enabled to change edge weights 
+     * periodically and randomly, at <time> seconds.
+     */
+    public void enableDelay(int delaySeconds) {
+        this.hasDelay = true;
+        if (delaySeconds <= 0) {
+            throw new IllegalArgumentException("delay seconds must greater than zero!");
+        }
+        this.updateDelay = delaySeconds;
+    }
+
+    public void disableDelay() {
+        this.hasDelay = false;
+        this.updateDelay = 0;
+    }
+
+    public int getDelay() {
+        return this.updateDelay;
+    }
+
+    public boolean hasDelay() {
+        return this.hasDelay;
     }
 
     public Set<Vertex> getV() {
