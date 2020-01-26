@@ -41,8 +41,8 @@ public class Graph {
     }
 
     /**
-     * Dynamic weight updates enabled to change edge weights 
-     * periodically and randomly, at <time> seconds.
+     * Dynamic weight updates enabled to change edge weights periodically and
+     * randomly, at <time> seconds.
      */
     public void enableDelay(int delaySeconds) {
         this.hasDelay = true;
@@ -79,6 +79,10 @@ public class Graph {
             this.idLookup.put(vertex.getId(), vertex);
             this.recomputeDistances = true;
         }
+    }
+
+    public Set<Vertex> getVertices() {
+        return this.V;
     }
 
     public Map<Integer, Vertex> getIdLookups() {
@@ -173,7 +177,16 @@ public class Graph {
         this.recomputeDistances = false;
     }
 
+    /**
+     * This is a temporary solution that allows shortest path distance map to reset.
+     * 
+     */
+    public void refreshPathMap() {
+        this.shortestPathDistances = new ArrayList<ArrayList<Integer>>();
+    }
+
     public ArrayList<ArrayList<Integer>> getShortestPathDistanceMap() {
+        refreshPathMap();
         if (this.recomputeDistances)
             this.updateFloydWarshallDistances();
         System.out.println("\n-----------------------");
