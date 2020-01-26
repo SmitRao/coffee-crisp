@@ -2,6 +2,9 @@ package com.chazle.com;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Experiments with graph stuff.
@@ -21,11 +24,39 @@ public class App {
         System.out.println(s);
     }
 
+    private static class EdgeWeightRandomizer implements Runnable {
+        private Graph g;
+
+        private EdgeWeightRandomizer(Graph g) {
+            this.g = g;
+        }
+
+        public void randomizeEdgeWeights() {
+            Random rand = new Random();
+
+            for (Vertex v : g.getVertices()) {
+                int sourceVertexId = v.getId();
+
+                for (int connectionId : v.getConnections()) {
+                    g.addEdge(sourceVertexId, connectionId, rand.nextInt(50) + 1); // randomize every connection weight
+                                                                                   // to values between 1 - 50
+                }
+            }
+
+            g.getShortestPathDistanceMap();
+        }
+
+        @Override
+        public void run() {
+            randomizeEdgeWeights();
+        }
+
+    }
+
     public static void main(String[] args) {
 
-        Random rand = new Random();
-
         Graph g = new Graph();
+        g.enableDelay(10);
 
         Vertex v0 = new Vertex(0);
         Vertex v1 = new Vertex(1);
@@ -48,17 +79,10 @@ public class App {
 
         g.getShortestPathDistanceMap();
 
-        for (int i = 0; i < 4; i++) {
-            for (Vertex v : g.getVertices()) {
-                int sourceVertexId = v.getId();
-
-                for (int connectionId : v.getConnections()) {
-                    g.addEdge(sourceVertexId, connectionId, rand.nextInt(50) + 1); // randomize every connection weight
-                                                                                   // to values between 1 - 50
-                }
-            }
-
-            g.getShortestPathDistanceMap();
+        if (g.hasDelay()) {
+            EdgeWeightRandomizer randomizer = new EdgeWeightRandomizer(g);
+            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+            scheduler.scheduleAtFixedRate(randomizer, g.getDelay(), g.getDelay(), TimeUnit.SECONDS);
         }
 
         ////////////////////////////////////
