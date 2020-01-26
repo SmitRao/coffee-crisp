@@ -35,8 +35,8 @@ public class GraphDraw extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		nodes = new ArrayList<Node>();
 		edges = new ArrayList<edge>();
-		width = 80;
-		height = 80;
+		width = 100;
+		height = 100;
 	}
 
 	public GraphDraw(String name) { // Construct with label
@@ -44,8 +44,8 @@ public class GraphDraw extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		nodes = new ArrayList<Node>();
 		edges = new ArrayList<edge>();
-		width = 80;
-		height = 80;
+		width = 100;
+		height = 100;
 	}
 
 	class Node {
@@ -83,13 +83,12 @@ public class GraphDraw extends JFrame {
 
 	public void paint(Graphics g) { // draw the nodes and edges
 		FontMetrics f = g.getFontMetrics();
-		g.setFont(new Font("Arial", Font.PLAIN, 16));
+		g.setFont(new Font("Arial", Font.PLAIN, 20));
 
 		int nodeHeight = Math.max(height, f.getHeight());
 
 		g.setColor(Color.black);
 		for (edge e : edges) {
-			g.drawLine(nodes.get(e.i).x, nodes.get(e.i).y, nodes.get(e.j).x, nodes.get(e.j).y);
 
 			int xMax = Math.max(nodes.get(e.i).x, nodes.get(e.j).x);
 			int yMax = Math.max(nodes.get(e.i).y, nodes.get(e.j).y);
@@ -97,9 +96,20 @@ public class GraphDraw extends JFrame {
 			int yMin = Math.min(nodes.get(e.i).y, nodes.get(e.j).y);
 			int labelX = xMin + ((xMax - xMin) / 2);
 			int labelY = yMin + ((yMax - yMin) / 2);
+
+			g.drawLine(nodes.get(e.i).x, nodes.get(e.i).y, nodes.get(e.j).x, nodes.get(e.j).y);
+			g.setColor(Color.RED);
+			g.drawLine(labelX, labelY, nodes.get(e.j).x, nodes.get(e.j).y);
+
 			g.setColor(Color.WHITE);
 			g.fillRect(labelX - 25, labelY - 25, 50, 50);
 			g.setColor(Color.BLACK);
+			// int arrowXs[] = { nodes.get(e.j).x - 50, nodes.get(e.j).x - 40,
+			// nodes.get(e.j).x - 50 };
+			// int arrowYs[] = { nodes.get(e.j).y - 50, nodes.get(e.j).y - 40,
+			// nodes.get(e.j).y - 50 };
+			// int numArrowPoints = 3;
+			// g.fillPolygon(arrowXs, arrowYs, numArrowPoints);
 			g.drawString(String.valueOf(e.weight), labelX, labelY);
 		}
 
@@ -153,7 +163,7 @@ class testGraphDraw {
 				}
 			}
 
-			g.getShortestPathDistanceMap();
+			g.getShortestPathDistanceMap(new String[] { "McMaster", "Wendy's", "Library", "BestBuy", "Home" });
 		}
 
 		@Override
@@ -171,13 +181,13 @@ class testGraphDraw {
 		frame.setVisible(true);
 
 		Graph g = new Graph();
-		g.enableDelay(10);
+		g.enableDelay(50);
 
-		frame.addNode("McMaster", 320, 160);
-		frame.addNode("Wendy's", 500, 890);
-		frame.addNode("Library", 890, 600);
-		frame.addNode("BestBuy", 125, 400);
-		frame.addNode("Home", 850, 340);
+		frame.addNode("McMaster (1)", 320, 160);
+		frame.addNode("Wendy's (2)", 500, 890);
+		frame.addNode("Library (3)", 890, 600);
+		frame.addNode("BestBuy (4)", 125, 400);
+		frame.addNode("Home (5)", 850, 340);
 
 		int MCMASTER = 0;
 		int WENDYS = 1;
@@ -219,7 +229,7 @@ class testGraphDraw {
 
 		if (g.hasDelay()) {
 			EdgeWeightRandomizer randomizer = new EdgeWeightRandomizer(g, frame);
-			ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+			ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
 			scheduler.scheduleAtFixedRate(randomizer, g.getDelay(), g.getDelay(), TimeUnit.SECONDS);
 		}
 

@@ -190,8 +190,29 @@ public class Graph {
         if (this.recomputeDistances)
             this.updateFloydWarshallDistances();
         System.out.println("\n-----------------------");
+        System.out.println("Destination Format: [McMaster, Wendy's, Library, BestBuy, Home]\n"); // remove!
+        int i = 0;
+        String[] labels = { "McMaster", "Wendy's", "Library", "BestBuy", "Home" };
         for (ArrayList<Integer> row : this.shortestPathDistances) {
-            System.out.println(row);
+            System.out.println(
+                    "From " + labels[i] + " to " + row.toString().replaceAll(String.valueOf(Graph.INF), "INF"));
+            i++;
+        }
+        System.out.println("-----------------------\n");
+        return this.shortestPathDistances;
+    }
+
+    public ArrayList<ArrayList<Integer>> getShortestPathDistanceMap(String[] labels) {
+        refreshPathMap();
+        if (this.recomputeDistances)
+            this.updateFloydWarshallDistances();
+        System.out.println("\n-----------------------");
+        System.out.println("Destination Format: [McMaster, Wendy's, Library, BestBuy, Home]\n"); // remove!
+        int i = 0;
+        for (ArrayList<Integer> row : this.shortestPathDistances) {
+            System.out.println(
+                    "From " + labels[i] + " to " + row.toString().replaceAll(String.valueOf(Graph.INF), "INF"));
+            i++;
         }
         System.out.println("-----------------------\n");
         return this.shortestPathDistances;
